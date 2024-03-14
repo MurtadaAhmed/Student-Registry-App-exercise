@@ -8,25 +8,6 @@ on:
   workflow_dispatch:   
 
 jobs:
-  build-test:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x, 18.x, 20.x]
-
-    steps:
-    - name: Checkout the repository
-      uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version}}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{matrix.node-version}}
-        cache: 'npm'
-    - name: install dependencies    
-      run: npm install
-    - name: Run intergration tests  
-      run: npm test
 
   test-security:
     runs-on: ubuntu-latest
@@ -47,4 +28,26 @@ jobs:
       run: npm install
     - name: Run security tests  
       run: npm run test-npm-security
-      
+        
+
+
+  build-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version}}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{matrix.node-version}}
+        cache: 'npm'
+    - name: install dependencies    
+      run: npm install
+    - name: Run intergration tests  
+      run: npm test
+
